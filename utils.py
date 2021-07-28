@@ -50,14 +50,11 @@ def setUpMotor():
 	return motor
 
 # TODO: This function should be able to select the direction of rotation
-def autoMove(motor, stepsFull = 0, steps16 = 0):
-	clockwise = getDirection()
-	motorFull(motor, clockwise, stepFull)
-	motor16(motor, clockwise, step16)
+def autoMove(motorAR, motorDEC, object = 'moon'):
 
-def getDirection():
+
+def getDirection(h,m,s):
 	coords = getCurrentCorrdinates()
-	
 
 # Moves the motor at full throttle
 def motorFull(motor, clockwise = True, steps = 200):
