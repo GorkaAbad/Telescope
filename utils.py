@@ -1,6 +1,6 @@
 import requests
 
-ip = '192.168.0.21'
+ip = '127.0.0.1'
 port = 8090
 # define GPIO pins
 GPIO_pins = (14, 15, 18)  # Microstep Resolution MS1-MS3 -> GPIO Pin
@@ -63,19 +63,37 @@ def setUpMotor():
     motor = RpiMotorLib.A4988Nema(direction, step, GPIO_pins, "A4988")
     return motor
 
+
+def getDecimal(coords):
+    pass
+
 # TODO: This function should be able to select the direction of rotation
 
 
 def autoMove(motorAR, motorDEC, object='moon'):
+    # Get coordinates from where I'm looking
+    curCoordinates = getCurrentCorrdinates()
+    # Check if the objective object is the same of what I'm already looking
+    moveStellariumTo(object)
+    # await
+    # Once moved, get the objective coordinates
+    objCoordinates = getCurrentCorrdinates()
+
+    curCoordsAR, curCoordsDEC = getDecimal(curCoordinates)
+    objCoordsAR, objCoordsDEC = getDecimal(objCoordinates)
+
+    AR = curCoordsAR - objCoordsAR
+    DEC = curCoordsDEC - objCoordsDEC
+
+    # Clockwise = True, False otherwise
+    direction = True
+
+    if AR >= 0:
+        direction = False
 
 
 def getDirection(h, m, s):
     coords = getCurrentCorrdinates()
-
-
-def autoMove(motorAR, motorDEC, objeto):
-
-    # Moves the motor at full throttle
 
 
 def motorFull(motor, clockwise=True, steps=200):

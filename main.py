@@ -10,3 +10,5 @@ import utils
 #stepFull, step16 = utils.degree2steps(19,60,54)
 
 utils.setPolaris()
+
+print(utils.getCurrentCorrdinates())
