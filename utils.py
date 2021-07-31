@@ -31,6 +31,12 @@ def makeRequest(scope='main', endpoint='view'):
 # Once the telescope is focused on plaris (manually), set the view in stellarium
 
 
+def getInfo():
+    r = requests.get(
+        'http://{}:{}/api/objects/info?name=moon&format=map'.format(ip, port))
+    print(r.json())
+
+
 def setPolaris():
     moveStellariumTo('polaris')
 
@@ -39,7 +45,7 @@ def setPolaris():
 
 def moveStellariumTo(target='polaris'):
     r = requests.post('http://{}:{}/api/main/focus'.format(ip,
-                      port), data='target={}'.format(target))
+                                                           port), data='target={}'.format(target))
     if r.status_code == 200:
         return r.json()
     else:
@@ -72,12 +78,12 @@ def getDecimal(coords):
 
 def autoMove(motorAR, motorDEC, object='moon'):
     # Get coordinates from where I'm looking
-    curCoordinates = getCurrentCorrdinates()
+    curCoordinates = getCurrentCorrdinates()['jNow']
     # Check if the objective object is the same of what I'm already looking
     moveStellariumTo(object)
     # await
     # Once moved, get the objective coordinates
-    objCoordinates = getCurrentCorrdinates()
+    objCoordinates = getCurrentCorrdinates()['jNow']
 
     curCoordsAR, curCoordsDEC = getDecimal(curCoordinates)
     objCoordsAR, objCoordsDEC = getDecimal(objCoordinates)

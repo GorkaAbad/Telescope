@@ -1,6 +1,6 @@
 import math
-import RPi.GPIO as GPIO
-from RpiMotorLib import RpiMotorLib
+#import RPi.GPIO as GPIO
+#from RpiMotorLib import RpiMotorLib
 import time
 import utils
 
@@ -11,4 +11,4 @@ import utils
 
 utils.setPolaris()
 
-print(utils.getCurrentCorrdinates())
+print(utils.getInfo())
